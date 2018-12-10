@@ -1,17 +1,18 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <unicode-table></unicode-table>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import UnicodeTable from './components/UnicodeTable.vue';
+
 
 export default {
   name: 'app',
   components: {
-    HelloWorld,
+    UnicodeTable,
   },
 };
 </script>
