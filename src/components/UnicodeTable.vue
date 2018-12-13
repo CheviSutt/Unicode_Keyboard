@@ -8,11 +8,13 @@
       <select>
         <option value="selectLanguage">Select Language</option>
       </select>
-      <table>
-        <tr v-for="key of keys">
-          <td>{{ key[4] }}</td>
-        </tr>
-      </table>
+        <div class="keyTable">
+          <table>
+            <tr v-for="(row, index) of keys" :key="index">
+              <td v-for="key of row" :title="key[5]">{{ key[4] }}</td>
+            </tr>
+          </table>
+      </div>
     </div>
 
   </div>
@@ -48,6 +50,10 @@ export default {
 <style>
   .keyboard {
     border: 1px solid black;
+    flex-shrink: 0;
+  }
+  .keyTable{
+    display: flex;
   }
   table, th, td {
     border: 1px solid black;
