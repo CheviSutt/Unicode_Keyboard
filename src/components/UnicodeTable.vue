@@ -1,12 +1,20 @@
-<template>
+<template xmlns:v="http://www.w3.org/1999/xhtml">
   <div class="container">
 
     <h1>{{ title }}</h1>
     <h2>{{ keys.length }}</h2>
 
     <div class="keyboard">
-      <select>
-        <option value="selectLanguage">Select Language</option>
+      <select @change="setLanguage(currLanguage)" v-model="currLanguage">
+        <option value="greek">Greek</option>
+        <option value="thai">Thai</option>
+        <option value="latin">Latin</option>
+        <option value="ctrl">Control characters</option>
+        <option value="math">Mathematical symbols</option>
+        <option value="greater">Greater-than signs</option>
+        <option value="quo">HTML quote entities</option>
+        <option value="amp">HTML ampersand entity</option>
+        <option value="962">Decimal lookup</option>
       </select>
         <div class="keyTable">
           <table>
@@ -28,6 +36,7 @@ export default {
   data() {
     return {
       title: 'Unicode Component',
+      currLanguage: '',
     };
   },
   computed: {
@@ -38,6 +47,7 @@ export default {
   methods: {
     ...mapActions([
       'getUnicode',
+      'setLanguage',
     ]),
   },
   created() {

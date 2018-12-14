@@ -8,6 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     keys: [],
+    language: 'latin',
   },
 
   mutations: {
@@ -28,21 +29,26 @@ export default new Vuex.Store({
       // console.log(rows);
       state.keys = rows;
     },
+    updateLanguage(state, language) {
+      state.language = language;
+    },
   },
-
   getters: {
     keys(state) {
       return state.keys;// I'll want to remove results
     },
   },
-
   actions: {
-    getUnicode({ commit }) {
-      axios.get('http://localhost:3333/lookup?q=latin&o=0')
+    getUnicode({ commit, state }) {
+      // axios.get('http://localhost:3333/lookup?q=latin&o=0')
+      axios.get('http://localhost:3333/lookup?q=' + state.language + '')
         .then(result => commit('updateKeys', result.data))
         .catch(console.error);
     },
-
+    setLanguage({ dispatch, commit, state }, selectedLanguage) {
+      commit('updateLanguage', selectedLanguage);
+      dispatch('getUnicode');
+    },
   },
 
 });
