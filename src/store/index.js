@@ -15,9 +15,9 @@ export default new Vuex.Store({
     updateKeys(state, keys) {
       const { results } = keys;// get results into a variable somehow
       const rows = [];
-      for (let i = 0; i < results.length + 10; i += 10) {
+      for (let i = 0; i < results.length + 16; i += 16) {
         const row = [];
-        for (let j = i; j < i + 10; j += 1) {
+        for (let j = i; j < i + 16; j += 1) {
           const td = results[j];
           if (!td) {
             break;
