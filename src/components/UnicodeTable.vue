@@ -20,29 +20,33 @@
         <div class="keyTable">
           <table>
             <tr v-for="(row, index) of keys" :key="index">
-              <td v-for="key of row" :title="key[5]" :key="key">{{ key[4] }}</td>
+              <td v-for="key of row" :title="key[5]" :key="key[0]" @click="recentSymbols(key)">
+                {{ key[4] }}</td>
             </tr>
           </table>
       </div>
       <h4>Recently used symbols:</h4>
-      <div class="recentSymbols">
+      <div class="recentRow">
         <table>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-          <td>4</td>
-          <td>5</td>
-          <td>6</td>
-          <td>7</td>
-          <td>8</td>
-          <td>9</td>
-          <td>10</td>
-          <td>11</td>
-          <td>12</td>
-          <td>13</td>
-          <td>14</td>
-          <td>15</td>
-          <td>16</td>
+          <tr>
+            <td v-for="symbol of symbols" :key="symbol[0]">{{ symbol[4] }}</td>
+            <!--<td>1</td>-->
+            <!--<td>2</td>-->
+            <!--<td>3</td>-->
+            <!--<td>4</td>-->
+            <!--<td>5</td>-->
+            <!--<td>6</td>-->
+            <!--<td>7</td>-->
+            <!--<td>8</td>-->
+            <!--<td>9</td>-->
+            <!--<td>10</td>-->
+            <!--<td>11</td>-->
+            <!--<td>12</td>-->
+            <!--<td>13</td>-->
+            <!--<td>14</td>-->
+            <!--<td>15</td>-->
+            <!--<td>16</td>-->
+          </tr>
         </table>
       </div>
       <div class="buttons">
@@ -58,10 +62,13 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'UnicodeTable',
+  symbolKey: '',
   data() {
     return {
       title: 'Unicode Keyboard',
       currLanguage: '',
+      newSymbol: {},
+      symbols: [],
     };
   },
   computed: {
@@ -74,7 +81,16 @@ export default {
       'getUnicode',
       'setLanguage',
     ]),
+
+    recentSymbols(key) {
+      this.symbols.unshift(key);
+      this.symbols = this.symbols.slice(0,15);
+      // key.preventDefault();
+      console.log(key);
+      this.$emit('keySelected', key);
+    },
   },
+
   created() {
     this.getUnicode();
   },
@@ -99,10 +115,12 @@ export default {
   .keyboard select {
     width: 60rem;
     margin: .5rem;
+    cursor: pointer;
   }
   .keyTable {
     display: flex;
     margin-bottom: .5rem;
+    cursor: pointer;
   }
   table, th, td {
     border: 1px solid black;
@@ -115,10 +133,11 @@ export default {
     display: flex;
     margin: 0;
   }
-  .recentSymbols {
+  .recentRow {
     margin-bottom: .5rem;
+    cursor: pointer;
   }
-  .buttons {
-
+  .buttons button {
+    cursor: pointer;
   }
 </style>
