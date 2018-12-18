@@ -30,22 +30,6 @@
         <table>
           <tr>
             <td v-for="symbol of symbols" :key="symbol[0]">{{ symbol[4] }}</td>
-            <!--<td>1</td>-->
-            <!--<td>2</td>-->
-            <!--<td>3</td>-->
-            <!--<td>4</td>-->
-            <!--<td>5</td>-->
-            <!--<td>6</td>-->
-            <!--<td>7</td>-->
-            <!--<td>8</td>-->
-            <!--<td>9</td>-->
-            <!--<td>10</td>-->
-            <!--<td>11</td>-->
-            <!--<td>12</td>-->
-            <!--<td>13</td>-->
-            <!--<td>14</td>-->
-            <!--<td>15</td>-->
-            <!--<td>16</td>-->
           </tr>
         </table>
       </div>
@@ -84,8 +68,7 @@ export default {
 
     recentSymbols(key) {
       this.symbols.unshift(key);
-      this.symbols = this.symbols.slice(0,15);
-      // key.preventDefault();
+      this.symbols = this.symbols.slice(0, 15);
       console.log(key);
       this.$emit('keySelected', key);
     },
