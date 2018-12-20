@@ -29,7 +29,7 @@
       <div class="recentRow">
         <table>
           <tr>
-            <td v-for="symbol of symbols" :key="symbol[0]">{{ symbol[4] }}</td>
+            <td v-for="symbol of symbols" :key="symbol[0]" :title="symbol[5]">{{ symbol[4] }}</td>
           </tr>
         </table>
       </div>
@@ -46,7 +46,6 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'UnicodeTable',
-  symbolKey: '',
   data() {
     return {
       title: 'Unicode Keyboard',
@@ -67,9 +66,17 @@ export default {
     ]),
 
     recentSymbols(key) {
-      this.symbols.unshift(key);
-      this.symbols = this.symbols.slice(0, 15);
-      console.log(key);
+      let prevSelected = false;
+      for (let i = 0; i < this.symbols.length; i++) {
+        if (this.symbols[i] === key) {
+          prevSelected = true;
+        }
+      }
+      if (!prevSelected) {
+        this.symbols.unshift(key);
+        this.symbols = this.symbols.slice(0, 15);
+        console.log(key);
+      }
       this.$emit('keySelected', key);
     },
   },
@@ -112,6 +119,11 @@ export default {
   th, td {
     padding: 5px;
   }
+  td:hover {
+    background-image: linear-gradient(to bottom,
+    #7db9e8 11%,#7db9e8 11%,#7db9e8 17%,#2989d8 43%,#207cca 68%,#1e5799 97%,#1e5799 97%);
+    color: white;
+  }
   h4 {
     display: flex;
     margin: 0;
@@ -122,5 +134,8 @@ export default {
   }
   .buttons button {
     cursor: pointer;
+    background-image: linear-gradient(to bottom,
+    #7db9e8 11%,#7db9e8 11%,#7db9e8 17%,#2989d8 43%,#207cca 68%,#1e5799 97%,#1e5799 97%);
+
   }
 </style>
