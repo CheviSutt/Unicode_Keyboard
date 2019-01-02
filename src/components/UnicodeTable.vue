@@ -67,15 +67,16 @@ export default {
 
     recentSymbols(key) {
       let prevSelected = false;
-      for (let i = 0; i < this.symbols.length; i++) {
+      for (let i = 0; i < this.symbols.length; i += 1) {
         if (this.symbols[i] === key) {
           prevSelected = true;
         }
       }
       if (!prevSelected) {
         this.symbols.unshift(key);
+        localStorage.setItem('characterSelected', JSON.stringify(this.symbols));
         this.symbols = this.symbols.slice(0, 15);
-        console.log(key);
+        console.log(this.symbols[0]);
       }
       this.$emit('keySelected', key);
     },
@@ -83,6 +84,7 @@ export default {
 
   created() {
     this.getUnicode();
+    this.symbols = JSON.parse(localStorage.getItem('characterSelected'));
   },
 
 };
