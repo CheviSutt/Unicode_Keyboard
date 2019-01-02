@@ -10,6 +10,8 @@
         <option value="greek">Greek</option>
         <option value="thai">Thai</option>
         <option value="latin">Latin</option>
+        <option value="german">German</option>
+        <option value="french">French</option>
         <option value="ctrl">Control characters</option>
         <option value="math">Mathematical symbols</option>
         <option value="greater">Greater-than signs</option>
