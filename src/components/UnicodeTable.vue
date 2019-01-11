@@ -2,7 +2,7 @@
   <div class="container">
 
     <h1>{{ title }}</h1>
-    <h2>{{ keys.length }}</h2>
+    <h2>{{ characters.length }}</h2>
 
     <div class="keyboard">
       <select @change="setLanguage(currLanguage)" v-model="currLanguage">
@@ -21,7 +21,7 @@
       </select>
         <div class="keyTable">
           <table>
-            <tr v-for="(row, index) of keys" :key="index">
+            <tr v-for="(row, index) of characters" :key="index">
               <td v-for="key of row" :title="key[5]" :key="key[0]" @click="recentSymbols(key)">
                 {{ key[4] }}</td>
             </tr>
@@ -58,7 +58,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      keys: 'keys',
+      characters: 'characters',
     }),
   },
   methods: {
