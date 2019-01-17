@@ -35,7 +35,7 @@ export default new Vuex.Store({
   },
   getters: {
     characters(state) {
-      return state.characters;// I'll want to remove results
+      return state.characters;
     },
   },
   actions: {

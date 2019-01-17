@@ -22,7 +22,8 @@
         <div class="keyTable">
           <table>
             <tr v-for="(row, index) of characters" :key="index">
-              <td v-for="key of row" :title="key[5]" :key="key[0]" @click="recentSymbols(key)">
+              <td v-bind:class="{ active: activeKey(key) }" v-for="key of row" :title="key[5]"
+                  :key="key[0]" @click="recentSymbols(key)">
                 {{ key[4] }}</td>
             </tr>
           </table>
@@ -52,8 +53,9 @@ export default {
     return {
       title: 'Unicode Keyboard',
       currLanguage: '',
-      newSymbol: {},
+      // newSymbol: {},
       symbols: [],
+      active: false,
     };
   },
   computed: {
@@ -82,11 +84,29 @@ export default {
       }
       this.$emit('keySelected', key);
     },
+
+    activeKey(key) {
+      let active;
+      let selected = false;
+      let currKey;
+      for (let i = 0; i < this.symbols.length; i += 1) {
+        if (this.symbols[i] === key) {
+          selected = true;
+          active = true;
+          currKey = this.symbols[i];
+        }
+      }
+      if (!selected) {
+        active = false;
+      }
+      this.$emit('keyClicked', key);
+      return active;
+    },
   },
 
   created() {
     this.getUnicode();
-    this.symbols = JSON.parse(localStorage.getItem('characterSelected'));
+    this.symbols = JSON.parse(localStorage.getItem('characterSelected')) || []; // clears length of null error when storage is clear
   },
 
 };
@@ -122,11 +142,16 @@ export default {
   }
   th, td {
     padding: 5px;
+    width: 1rem;
+    height: 1rem;
   }
   td:hover {
     background-image: linear-gradient(to bottom,
     #7db9e8 11%,#7db9e8 11%,#7db9e8 17%,#2989d8 43%,#207cca 68%,#1e5799 97%,#1e5799 97%);
     color: white;
+  }
+  .active {
+    background-color: purple;
   }
   h4 {
     display: flex;
