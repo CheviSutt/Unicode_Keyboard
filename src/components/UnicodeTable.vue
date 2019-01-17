@@ -23,7 +23,7 @@
           <table>
             <tr v-for="(row, index) of characters" :key="index">
               <td v-bind:class="{ active: activeKey(key) }" v-for="key of row" :title="key[5]"
-                  :key="key[0]" @click="recentSymbols(key)">
+                  :key="key[3]" @click="recentSymbols(key)">
                 {{ key[4] }}</td>
             </tr>
           </table>
@@ -70,6 +70,7 @@ export default {
     ]),
 
     recentSymbols(key) {
+      this.clickedKey = key;
       let prevSelected = false;
       for (let i = 0; i < this.symbols.length; i += 1) {
         if (this.symbols[i] === key) {
@@ -86,22 +87,12 @@ export default {
     },
 
     activeKey(key) {
-      let active;
-      let selected = false;
-      let currKey;
-      for (let i = 0; i < this.symbols.length; i += 1) {
-        if (this.symbols[i] === key) {
-          selected = true;
-          active = true;
-          currKey = this.symbols[i];
-        }
+      // console.log(this.clickedKey, key);
+      if (this.clickedKey === key) {
+        return true;
       }
-      if (!selected) {
-        active = false;
-      }
-      this.$emit('keyClicked', key);
-      return active;
     },
+
   },
 
   created() {
@@ -151,7 +142,7 @@ export default {
     color: white;
   }
   .active {
-    background-color: purple;
+    background-color: lawngreen;
   }
   h4 {
     display: flex;
