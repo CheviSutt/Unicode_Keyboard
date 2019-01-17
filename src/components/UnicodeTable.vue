@@ -24,7 +24,7 @@
             <tr v-for="(row, index) of characters" :key="index">
               <td v-bind:class="{ active: activeKey(key) }" v-for="key of row" :title="key[5]"
                   :key="key[3]" @click="recentSymbols(key)">
-                {{ key[4] }}</td>
+                <div class="keyButton">{{ key[4] }}</div></td>
             </tr>
           </table>
       </div>
@@ -32,7 +32,8 @@
       <div class="recentRow">
         <table>
           <tr>
-            <td v-for="symbol of symbols" :key="symbol[0]" :title="symbol[5]">{{ symbol[4] }}</td>
+            <td v-for="symbol of symbols" :key="symbol[0]" :title="symbol[5]">
+              <div class="keyButton">{{ symbol[4] }}</div></td>
           </tr>
         </table>
       </div>
@@ -132,9 +133,9 @@ export default {
     border-collapse: collapse;
   }
   th, td {
-    padding: 5px;
-    width: 1rem;
-    height: 1rem;
+    /*padding: 5px;*/
+    /*width: 1rem;*/
+    /*height: 1rem;*/
   }
   td:hover {
     background-image: linear-gradient(to bottom,
@@ -143,6 +144,14 @@ export default {
   }
   .active {
     background-color: lawngreen;
+  }
+  .keyButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 4px;
   }
   h4 {
     display: flex;
