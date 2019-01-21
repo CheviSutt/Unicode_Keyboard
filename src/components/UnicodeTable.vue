@@ -32,7 +32,8 @@
       <div class="recentRow">
         <table>
           <tr>
-            <td v-for="symbol of symbols" :key="symbol[0]" :title="symbol[5]">
+            <td v-for="symbol of symbols"
+                :key="symbol[0]" :title="symbol[5]">
               <div class="keyButton">{{ symbol[4] }}</div></td>
           </tr>
         </table>
@@ -80,8 +81,8 @@ export default {
       }
       if (!prevSelected) {
         this.symbols.unshift(key);
-        localStorage.setItem('characterSelected', JSON.stringify(this.symbols));
         this.symbols = this.symbols.slice(0, 15);
+        localStorage.setItem('characterSelected', JSON.stringify(this.symbols));
         console.log(this.symbols[0]);
       }
       this.$emit('keySelected', key);
@@ -119,7 +120,7 @@ export default {
     flex-shrink: 0;
   }
   .keyboard select {
-    width: 60rem;
+    width: 35rem;
     margin: .5rem;
     cursor: pointer;
   }
@@ -149,8 +150,8 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2.0rem;
+    height: 2.0rem;
     padding: 4px;
   }
   h4 {
@@ -163,8 +164,6 @@ export default {
   }
   .buttons button {
     cursor: pointer;
-    background-image: linear-gradient(to bottom,
-    #7db9e8 11%,#7db9e8 11%,#7db9e8 17%,#2989d8 43%,#207cca 68%,#1e5799 97%,#1e5799 97%);
-
+    background-color: cornflowerblue;
   }
 </style>
